@@ -1,5 +1,7 @@
 package com.ngon.backend.controller;
 
+import com.ngon.backend.dto.AuthResponse;
+import com.ngon.backend.dto.LoginRequest;
 import com.ngon.backend.dto.RegisterRequest;
 import com.ngon.backend.service.AuthService;
 
@@ -22,6 +24,12 @@ public class AuthController
     @PostMapping("/register")
     public void registerUser(@RequestBody RegisterRequest request)
     {
-        authService.createUser(request);
+        authService.registerUser(request);
+    }
+
+    @PostMapping("/login")
+    public AuthResponse loginUser(@RequestBody LoginRequest request)
+    {
+        return authService.loginUser(request);
     }
 }
