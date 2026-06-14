@@ -5,6 +5,7 @@ import com.ngon.backend.dto.LoginRequest;
 import com.ngon.backend.dto.RegisterRequest;
 import com.ngon.backend.service.AuthService;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,8 +29,8 @@ public class AuthController
     }
 
     @PostMapping("/login")
-    public AuthResponse loginUser(@RequestBody LoginRequest request)
+    public ResponseEntity<AuthResponse> loginUser(@RequestBody LoginRequest request)
     {
-        return authService.loginUser(request);
+        return ResponseEntity.ok(authService.loginUser(request));
     }
 }

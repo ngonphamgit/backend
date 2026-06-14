@@ -2,13 +2,14 @@ package com.ngon.backend.service;
 
 import com.ngon.backend.dto.AuthResponse;
 import com.ngon.backend.dto.LoginRequest;
+import com.ngon.backend.entity.Role;
 import com.ngon.backend.entity.User;
 import com.ngon.backend.dto.RegisterRequest;
 import com.ngon.backend.repository.UserRepository;
 
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
 @Service
 public class AuthService
@@ -26,6 +27,11 @@ public class AuthService
 
     public void registerUser(RegisterRequest request)
     {
+        if (userRepo.existsByUsername(request.username()))
+        {
+            throw new RuntimeException("Username already exists");
+        }
+
         if (userRepo.existsByEmail(request.email()))
         {
             throw new RuntimeException("Email already exists");
@@ -35,7 +41,7 @@ public class AuthService
         user.setUsername(request.username());
         user.setEmail(request.email());
         user.setPassword(passwordEncoder.encode(request.password()));
-        user.setRole("USER");
+        user.setRole(Role.ROLE_USER);
 
         userRepo.save(user);
     }
@@ -46,15 +52,15 @@ public class AuthService
 
         if (user == null)
         {
-            throw new RuntimeException("Invalid login");
+            throw new BadCredentialsException("Invalid login");
         }
 
         if (!passwordEncoder.matches(request.password(), user.getPassword()))
         {
-            throw new RuntimeException("Invalid login");
+            throw new BadCredentialsException("Invalid login");
         }
 
-        String token = jwtService.generateToken(user.getEmail());
+        String token = jwtService.generateToken(user.getUsername());
         return new AuthResponse(token);
     }
 }
