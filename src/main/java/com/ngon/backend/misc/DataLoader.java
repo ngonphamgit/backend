@@ -9,7 +9,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import java.util.Random;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component
@@ -50,7 +51,7 @@ public class DataLoader implements CommandLineRunner
                 Product product = new Product();
                 product.setName("product" + i);
                 product.setQuantity(ThreadLocalRandom.current().nextInt(100) + 1);
-                product.setPrice(Math.round(ThreadLocalRandom.current().nextFloat(1.0f, 1000.0f) * 100) / 100.0f);
+                product.setPrice(BigDecimal.valueOf(ThreadLocalRandom.current().nextInt(100, 100000), 2));
                 product.setCategory("category" + ThreadLocalRandom.current().nextInt(1, 8));
 
                 System.out.println(product.getName() + " " + product.getQuantity() + " " + product.getPrice() + " " + product.getCategory());
