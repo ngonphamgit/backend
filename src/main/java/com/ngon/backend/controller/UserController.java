@@ -1,5 +1,8 @@
 package com.ngon.backend.controller;
 
+import com.ngon.backend.dto.DeleteUserRequest;
+import com.ngon.backend.service.UserService;
+
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -8,16 +11,24 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/users")
 public class UserController
 {
-    @GetMapping("/me")
-    public String getUser(Authentication auth)
+    private final UserService userService;
+
+    public UserController(UserService userService)
     {
-        return auth.getName();
+        this.userService = userService;
+    }
+
+    @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
+    @GetMapping("/me")
+    public String getMe(Authentication auth)
+    {
+        return userService.getMe(auth);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
-    @GetMapping("/delete")
-    public String deleteUser()
+    @PostMapping("/delete")
+    public void deleteUser(@RequestBody DeleteUserRequest request)
     {
-        return "admin access";
+        userService.deleteUser(request);
     }
 }

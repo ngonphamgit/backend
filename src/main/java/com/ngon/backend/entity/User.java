@@ -13,8 +13,12 @@ public class User
     private String username;
     private String email;
     private String password;
+
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    private String firstName;
+    private String lastName;
 
     public void setUsername(String username) {this.username = username;}
     public void setEmail(String email) {this.email = email;}
