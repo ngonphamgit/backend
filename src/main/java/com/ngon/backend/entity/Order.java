@@ -19,13 +19,17 @@ public class Order
     private LocalDateTime orderTime;
     @Enumerated(EnumType.STRING)
     private OrderStatus status;
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items = new ArrayList<OrderItem>();
 
     public void setUser(User user) {this.user = user;}
     public void setOrderTime(LocalDateTime orderTime) {this.orderTime = orderTime;}
     public void setStatus(OrderStatus status) {this.status = status;}
-    public void addOrderItem(OrderItem item) {this.items.add(item);}
+    public void addOrderItem(OrderItem item)
+    {
+        this.items.add(item);
+        item.setOrder(this);
+    }
     public void removeOrderItem(OrderItem item) {this.items.remove(item);}
 
     public User getUser() {return this.user;}
