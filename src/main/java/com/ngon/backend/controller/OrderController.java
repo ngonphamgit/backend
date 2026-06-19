@@ -3,6 +3,7 @@ package com.ngon.backend.controller;
 import com.ngon.backend.dto.AddOrderItemRequest;
 import com.ngon.backend.dto.OrderResponse;
 import com.ngon.backend.dto.RemoveOrderItemRequest;
+import com.ngon.backend.dto.UpdateOrderItemRequest;
 import com.ngon.backend.service.OrderService;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
@@ -38,5 +39,12 @@ public class OrderController
     public OrderResponse removeItemFromCart(@RequestBody RemoveOrderItemRequest request, Authentication auth)
     {
         return orderService.removeItemFromCart(request, auth);
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PostMapping("/updateItem")
+    public OrderResponse updateItemInCart(@RequestBody UpdateOrderItemRequest request, Authentication auth)
+    {
+        return orderService.updateItemInCart(request, auth);
     }
 }

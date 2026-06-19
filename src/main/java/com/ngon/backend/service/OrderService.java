@@ -1,9 +1,6 @@
 package com.ngon.backend.service;
 
-import com.ngon.backend.dto.AddOrderItemRequest;
-import com.ngon.backend.dto.OrderItemResponse;
-import com.ngon.backend.dto.OrderResponse;
-import com.ngon.backend.dto.RemoveOrderItemRequest;
+import com.ngon.backend.dto.*;
 import com.ngon.backend.entity.*;
 import com.ngon.backend.repository.OrderItemRepository;
 import com.ngon.backend.repository.OrderRepository;
@@ -76,6 +73,22 @@ public class OrderService
                 .orElseThrow(() -> new RuntimeException("Order item not found"));
 
         currentOrder.removeOrderItem(orderItem);
+        orderRepo.save(currentOrder);
+
+        return orderToResponse(currentOrder);
+    }
+
+    @Transactional
+    public OrderResponse updateItemInCart(UpdateOrderItemRequest request, Authentication auth)
+    {
+        User user = userRepo.findByUsername(auth.getName());
+        Order currentOrder = orderRepo.findByUserIdAndStatus(user.getId(), OrderStatus.CART)
+                .orElseGet(() -> createOrder(user));
+
+        OrderItem orderItem = orderItemRepo.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("Order item not found"));
+
+        orderItem.setQuantity(request.quantity());
         orderRepo.save(currentOrder);
 
         return orderToResponse(currentOrder);
