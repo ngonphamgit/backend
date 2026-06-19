@@ -1,6 +1,6 @@
 package com.ngon.backend.dto;
 
-public record OrderItemRequest(
+public record UpdateOrderItemRequest(
         Long id,
         int quantity
 )

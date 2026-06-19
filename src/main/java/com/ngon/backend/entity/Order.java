@@ -30,7 +30,11 @@ public class Order
         this.items.add(item);
         item.setOrder(this);
     }
-    public void removeOrderItem(OrderItem item) {this.items.remove(item);}
+    public void removeOrderItem(OrderItem item)
+    {
+        this.items.remove(item);
+        item.setOrder(null);
+    }
 
     public User getUser() {return this.user;}
     public LocalDateTime getOrderTime() {return this.orderTime;}
