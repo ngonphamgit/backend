@@ -1,16 +1,15 @@
 package com.ngon.backend.misc;
 
-import com.ngon.backend.entity.Product;
-import com.ngon.backend.entity.Role;
-import com.ngon.backend.entity.User;
-import com.ngon.backend.repository.ProductRepository;
-import com.ngon.backend.repository.UserRepository;
+import com.ngon.backend.product.Product;
+import com.ngon.backend.user.Role;
+import com.ngon.backend.user.User;
+import com.ngon.backend.product.ProductRepository;
+import com.ngon.backend.user.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Component

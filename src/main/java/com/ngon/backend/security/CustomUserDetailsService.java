@@ -1,7 +1,7 @@
 package com.ngon.backend.security;
 
-import com.ngon.backend.repository.UserRepository;
-import com.ngon.backend.entity.User;
+import com.ngon.backend.user.UserRepository;
+import com.ngon.backend.user.User;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
