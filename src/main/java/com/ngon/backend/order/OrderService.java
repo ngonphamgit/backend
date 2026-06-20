@@ -110,7 +110,7 @@ public class OrderService
         {
             orderItemResponses.add(orderItemToResponse(orderItem));
         }
-        return new OrderResponse(orderItemResponses);
+        return new OrderResponse(order.getId(), order.getStatus(), order.getOrderTime(), orderItemResponses);
     }
 
     private OrderItemResponse orderItemToResponse(OrderItem item)

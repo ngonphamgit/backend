@@ -3,6 +3,7 @@ package com.ngon.backend.product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class ProductService
@@ -21,7 +22,8 @@ public class ProductService
         return this.toResponse(product);
     }
 
-    public ProductResponse createProduct(ProductRequest request)
+    @Transactional
+    public ProductResponse createProduct(CreateProductRequest request)
     {
         Product product = new Product();
         product.setName(request.name());
@@ -31,7 +33,23 @@ public class ProductService
 
         productRepo.save(product);
 
-        return this.toResponse(product);
+        return toResponse(product);
+    }
+
+    @Transactional
+    public ProductResponse updateProduct(Long id, UpdateProductRequest request)
+    {
+        Product product = productRepo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        product.setName(request.name());
+        product.setQuantity(request.quantity());
+        product.setPrice(request.price());
+        product.setCategory(request.category());
+
+        productRepo.save(product);
+
+        return toResponse(product);
     }
 
     public Page<ProductResponse> getProductsByCategory(String category)

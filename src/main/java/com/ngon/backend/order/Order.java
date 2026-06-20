@@ -37,6 +37,7 @@ public class Order
         item.setOrder(null);
     }
 
+    public Long getId() {return this.id;}
     public User getUser() {return this.user;}
     public LocalDateTime getOrderTime() {return this.orderTime;}
     public OrderStatus getStatus() {return this.status;}
