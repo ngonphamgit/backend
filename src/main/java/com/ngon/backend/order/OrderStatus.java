@@ -3,8 +3,7 @@ package com.ngon.backend.order;
 public enum OrderStatus
 {
     CART,
-    PENDING,
-    PAID,
+    PLACED,
     SHIPPED,
     DELIVERED,
     CANCELLED

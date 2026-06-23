@@ -42,4 +42,11 @@ public class OrderController
     {
         return orderService.updateItemInCart(request, auth);
     }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PostMapping("/checkout")
+    public CheckoutResponse checkout(Authentication auth)
+    {
+        return orderService.checkout(auth);
+    }
 }
