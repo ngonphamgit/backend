@@ -1,5 +1,6 @@
 package com.ngon.backend.product;
 
+import com.ngon.backend.exception.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,7 +18,7 @@ public class ProductService
 
     public ProductResponse getProductById(Long id)
     {
-        Product product = productRepo.findById(id).orElseThrow(() -> new RuntimeException("Product not found"));
+        Product product = productRepo.findById(id).orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
         return this.toResponse(product);
     }
@@ -40,7 +41,7 @@ public class ProductService
     public ProductResponse updateProduct(Long id, UpdateProductRequest request)
     {
         Product product = productRepo.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
         product.setName(request.name());
         product.setQuantity(request.quantity());

@@ -1,5 +1,6 @@
 package com.ngon.backend.order;
 
+import com.ngon.backend.exception.*;
 import com.ngon.backend.product.Product;
 import com.ngon.backend.product.ProductRepository;
 import com.ngon.backend.user.UserRepository;
@@ -47,7 +48,7 @@ public class OrderService
                 .orElseGet(() -> createOrder(user));
 
         Product product = productRepo.findById(request.id())
-                .orElseThrow(() -> new RuntimeException("Product not found"));
+                .orElseThrow(() -> new ProductNotFoundException("Product not found"));
 
         OrderItem orderItem = new OrderItem();
         orderItem.setOrder(currentOrder);
@@ -69,7 +70,7 @@ public class OrderService
                 .orElseGet(() -> createOrder(user));
 
         OrderItem orderItem = orderItemRepo.findById(request.id())
-                .orElseThrow(() -> new RuntimeException("Order item not found"));
+                .orElseThrow(() -> new OrderItemNotFoundException("Order item not found"));
 
         currentOrder.removeOrderItem(orderItem);
         orderRepo.save(currentOrder);
@@ -85,7 +86,7 @@ public class OrderService
                 .orElseGet(() -> createOrder(user));
 
         OrderItem orderItem = orderItemRepo.findById(request.id())
-                .orElseThrow(() -> new RuntimeException("Order item not found"));
+                .orElseThrow(() -> new OrderItemNotFoundException("Order item not found"));
 
         BigDecimal beforeSubtotal = orderItem.getUnitPrice().multiply(BigDecimal.valueOf(orderItem.getQuantity()));
         currentOrder.setTotal(currentOrder.getTotal().subtract(beforeSubtotal));
@@ -105,23 +106,23 @@ public class OrderService
     {
         User user = userRepo.findByUsername(auth.getName());
         Order currentOrder = orderRepo.findByUserIdAndStatus(user.getId(), OrderStatus.CART)
-                .orElseThrow(() -> new RuntimeException("No active cart"));
+                .orElseThrow(() -> new NoActiveCartException("No active cart"));
 
         List<OrderItem> orderItems = currentOrder.getOrderItems();
         if (orderItems.isEmpty())
         {
-            throw new RuntimeException("Cart is empty");
+            throw new EmptyCartException("Cart is empty");
         }
 
         BigDecimal total = BigDecimal.ZERO;
         for (OrderItem orderItem : orderItems)
         {
             Product product = productRepo.findById(orderItem.getProduct().getId())
-                    .orElseThrow(() -> new RuntimeException("Product no longer exists"));
+                    .orElseThrow(() -> new ProductNotFoundException("Product no longer exists"));
 
             if (orderItem.getQuantity() > product.getQuantity())
             {
-                throw new RuntimeException("Not enough stock");
+                throw new InsufficientStockException("Insufficient stock");
             }
 
             product.setQuantity(product.getQuantity() - orderItem.getQuantity());

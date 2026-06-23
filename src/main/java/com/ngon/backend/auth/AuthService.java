@@ -1,5 +1,8 @@
 package com.ngon.backend.auth;
 
+import com.ngon.backend.exception.EmailExistsException;
+import com.ngon.backend.exception.InvalidLoginException;
+import com.ngon.backend.exception.UsernameExistsException;
 import com.ngon.backend.security.JwtService;
 import com.ngon.backend.user.Role;
 import com.ngon.backend.user.User;
@@ -27,12 +30,12 @@ public class AuthService
     {
         if (userRepo.existsByUsername(request.username()))
         {
-            throw new RuntimeException("Username already exists");
+            throw new UsernameExistsException("Username already exists");
         }
 
         if (userRepo.existsByEmail(request.email()))
         {
-            throw new RuntimeException("Email already exists");
+            throw new EmailExistsException("Email already exists");
         }
 
         User user = new User();
@@ -50,12 +53,12 @@ public class AuthService
 
         if (user == null)
         {
-            throw new BadCredentialsException("Invalid login");
+            throw new InvalidLoginException("Invalid login");
         }
 
         if (!passwordEncoder.matches(request.password(), user.getPassword()))
         {
-            throw new BadCredentialsException("Invalid login");
+            throw new InvalidLoginException("Invalid login");
         }
 
         String token = jwtService.generateToken(user.getUsername());

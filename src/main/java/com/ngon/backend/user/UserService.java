@@ -1,5 +1,6 @@
 package com.ngon.backend.user;
 
+import com.ngon.backend.exception.UserNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class UserService
 
         if (user == null)
         {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+            throw new UserNotFoundException("User not found");
         }
 
         userRepo.delete(user);
