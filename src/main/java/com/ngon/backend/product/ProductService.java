@@ -55,7 +55,12 @@ public class ProductService
 
     public Page<ProductResponse> getProductsByCategory(String category)
     {
-        return productRepo.findAllByCategory(category, PageRequest.of(0, 20)).map(this::toResponse);
+        return productRepo.findAllByCategory(category, PageRequest.of(0, 1020)).map(this::toResponse);
+    }
+
+    public Page<ProductResponse> searchProducts(String query)
+    {
+        return productRepo.searchByName(query, PageRequest.of(0, 10)).map(this::toResponse);
     }
 
     private ProductResponse toResponse(Product product)

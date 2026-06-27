@@ -41,4 +41,9 @@ public class ProductController
         return productService.getProductsByCategory(category);
     }
 
+    @GetMapping("/search")
+    public Page<ProductResponse> searchProducts(@RequestParam String query)
+    {
+        return productService.searchProducts(query);
+    }
 }

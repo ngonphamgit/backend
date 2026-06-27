@@ -5,6 +5,7 @@ import com.ngon.backend.user.Role;
 import com.ngon.backend.user.User;
 import com.ngon.backend.product.ProductRepository;
 import com.ngon.backend.user.UserRepository;
+import net.datafaker.Faker;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -29,6 +30,8 @@ public class DataLoader implements CommandLineRunner
     @Override
     public void run(String... args)
     {
+        Faker faker = new Faker();
+
         if (userRepo.count() <= 1)
         {
             for (int i = 0; i < 50; i++)
@@ -45,10 +48,10 @@ public class DataLoader implements CommandLineRunner
 
         if (productRepo.count() <= 0)
         {
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1000; i++)
             {
                 Product product = new Product();
-                product.setName("product" + i);
+                product.setName(faker.commerce().productName());
                 product.setQuantity(ThreadLocalRandom.current().nextInt(100) + 1);
                 product.setPrice(BigDecimal.valueOf(ThreadLocalRandom.current().nextInt(100, 100000), 2));
                 product.setCategory("category" + ThreadLocalRandom.current().nextInt(1, 8));
