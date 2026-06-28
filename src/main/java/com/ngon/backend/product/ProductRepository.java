@@ -14,7 +14,6 @@ public interface ProductRepository extends JpaRepository<Product, Long>
             "SELECT * " +
             "FROM products " +
             "WHERE to_tsvector('english', name) @@ to_tsquery(:query) " +
-                    "OR name ILIKE CONCAT('%', :query, '%') " +
             "ORDER BY ts_rank(to_tsvector('english', name), plainto_tsquery('english', :query)) DESC",
             countQuery =
             "SELECT count(*) " +

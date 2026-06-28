@@ -1,9 +1,11 @@
 package com.ngon.backend.product;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://127.0.0.1:5500")
 @RestController
 @RequestMapping("/products")
 public class ProductController
@@ -36,14 +38,14 @@ public class ProductController
     }
 
     @GetMapping("/categories/{category}")
-    public Page<ProductResponse> getProductsByCategory(@PathVariable String category)
+    public Page<ProductResponse> getProductsByCategory(@PathVariable String category, Pageable pageable)
     {
-        return productService.getProductsByCategory(category);
+        return productService.getProductsByCategory(category, pageable);
     }
 
     @GetMapping("/search")
-    public Page<ProductResponse> searchProducts(@RequestParam String query)
+    public Page<ProductResponse> searchProducts(@RequestParam String query, Pageable pageable)
     {
-        return productService.searchProducts(query);
+        return productService.searchProducts(query, pageable);
     }
 }

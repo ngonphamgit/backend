@@ -3,6 +3,7 @@ package com.ngon.backend.product;
 import com.ngon.backend.exception.ProductNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,14 +54,14 @@ public class ProductService
         return toResponse(product);
     }
 
-    public Page<ProductResponse> getProductsByCategory(String category)
+    public Page<ProductResponse> getProductsByCategory(String category, Pageable pageable)
     {
-        return productRepo.findAllByCategory(category, PageRequest.of(0, 1020)).map(this::toResponse);
+        return productRepo.findAllByCategory(category, pageable).map(this::toResponse);
     }
 
-    public Page<ProductResponse> searchProducts(String query)
+    public Page<ProductResponse> searchProducts(String query, Pageable pageable)
     {
-        return productRepo.searchByName(query, PageRequest.of(0, 10)).map(this::toResponse);
+        return productRepo.searchByName(query, pageable).map(this::toResponse);
     }
 
     private ProductResponse toResponse(Product product)
@@ -69,7 +70,8 @@ public class ProductService
                 product.getName(),
                 product.getQuantity(),
                 product.getPrice(),
-                product.getCategory()
+                product.getCategory(),
+                product.getDescription()
         );
     }
 }

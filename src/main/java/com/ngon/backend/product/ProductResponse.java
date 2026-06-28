@@ -8,6 +8,7 @@ public record ProductResponse(
         @NotBlank String name,
         @NotBlank int quantity,
         @NotBlank BigDecimal price,
-        @NotBlank String category
+        @NotBlank String category,
+        @NotBlank String description
 )
 {}

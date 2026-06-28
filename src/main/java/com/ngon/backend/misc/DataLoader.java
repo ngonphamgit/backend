@@ -55,8 +55,8 @@ public class DataLoader implements CommandLineRunner
                 product.setQuantity(ThreadLocalRandom.current().nextInt(100) + 1);
                 product.setPrice(BigDecimal.valueOf(ThreadLocalRandom.current().nextInt(100, 100000), 2));
                 product.setCategory("category" + ThreadLocalRandom.current().nextInt(1, 8));
+                product.setDescription(faker.lorem().sentence());
 
-                System.out.println(product.getName() + " " + product.getQuantity() + " " + product.getPrice() + " " + product.getCategory());
                 productRepo.save(product);
             }
         }
