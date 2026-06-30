@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Full Stack E-Commerce Application
+        </title>
+        <link rel="stylesheet" href="css/styles.css">
+    </head>
+
+    <body>
+        <h1 id="page-title">
+            Full Stack E-Commerce Application
+        </h1>
+
+        <div id="search-container">
+            <input id="search-bar" type="text" placeholder="Search for products">
+            <button id="search-button">Search</button>
+        </div>
+
+        <template id="product-card-template">
+            <div class="product-card">
+                <img src="https://picsum.photos/175" alt="Product">
+                <div class="product-card-info">
+                    <h2 class="product-card-name">Product Name</h2>
+                    <p class="product-card-desc">Lorem ipsum</p>
+                    <h3 class="product-card-price">Product Price</h3>
+                </div>
+            </div>
+        </template>
+
+        <div id="product-cards-container">
+            <div id="product-cards">
+
+            </div>
+            <div id="page-navigator-container">
+                <button id="previous-page-button">&lt;&lt;</button>
+                <p id="page-number">1</p>
+                <button id="next-page-button">&gt;&gt;</button>
+            </div>
+        </div>
+        
+        <script src="js/products.js"></script>
+        <script>
+            window.addEventListener("DOMContentLoaded", async () => {
+                const params = new URLSearchParams(window.location.search);
+                query = params.get("query") || "";
+
+                productCards.innerHTML = "";
+                displayProducts(await fetchProducts(query, productPage, size));
+                pageNumber.textContent = productPage;
+            });
+        </script>
+    </body>
+</html>
