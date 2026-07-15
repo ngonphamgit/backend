@@ -67,11 +67,13 @@ public class ProductService
     private ProductResponse toResponse(Product product)
     {
         return new ProductResponse(
+                product.getId(),
                 product.getName(),
                 product.getQuantity(),
                 product.getPrice(),
                 product.getCategory(),
-                product.getDescription()
+                product.getDescription(),
+                product.getProductType().toString()
         );
     }
 }

@@ -1,6 +1,7 @@
 package com.ngon.backend.misc;
 
 import com.ngon.backend.product.Product;
+import com.ngon.backend.product.ProductType;
 import com.ngon.backend.user.Role;
 import com.ngon.backend.user.User;
 import com.ngon.backend.product.ProductRepository;
@@ -56,6 +57,7 @@ public class DataLoader implements CommandLineRunner
                 product.setPrice(BigDecimal.valueOf(ThreadLocalRandom.current().nextInt(100, 100000), 2));
                 product.setCategory("category" + ThreadLocalRandom.current().nextInt(1, 8));
                 product.setDescription(faker.lorem().sentence());
+                product.setProductType(ProductType.NORMAL);
 
                 productRepo.save(product);
             }
