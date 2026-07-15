@@ -1,5 +1,5 @@
-body {
-    background-color: rgb(185, 216, 255);
+.special-products-title {
+    font-family: Calibri, Arial, sans-serif;
 }
 
 .special-products-container {
@@ -46,5 +46,6 @@ body {
 .special-product-card-price {
     margin-top: 0px;
     margin-left: -5px;
+    font-family: Calibri, Arial, sans-serif;
     height: 12px;
 }
