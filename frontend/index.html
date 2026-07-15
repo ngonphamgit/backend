@@ -5,17 +5,11 @@
             Full Stack E-Commerce Application
         </title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/header.css">
     </head>
 
     <body>
-        <h1 id="page-title">
-            Full Stack E-Commerce Application
-        </h1>
-
-        <div id="search-container">
-            <input id="search-bar" type="text" placeholder="Search for products">
-            <button id="search-button">Search</button>
-        </div>
+        <div id="header"></div>
 
         <template id="product-card-template">
             <div class="special-product-card">
@@ -81,17 +75,7 @@
             </div>
         </div>
 
-        <script>
-            window.addEventListener("DOMContentLoaded", () => {
-                const params = new URLSearchParams(window.location.search);
-
-                const query = params.get("query") || "";
-                const page = params.get("page") || 1;
-                const size = params.get("size") || 10;
-
-                fetchProducts(query, page, size);
-            });
-        </script>
+        <script src="js/header.js"></script>
         <script src="js/products.js"></script>
     </body>
 </html>

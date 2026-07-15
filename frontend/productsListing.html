@@ -5,27 +5,24 @@
             Full Stack E-Commerce Application
         </title>
         <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/productsListing.css">
     </head>
 
     <body>
-        <h1 id="page-title">
-            Full Stack E-Commerce Application
-        </h1>
-
-        <div id="search-container">
-            <input id="search-bar" type="text" placeholder="Search for products">
-            <button id="search-button">Search</button>
-        </div>
+        <div id="header"></div>>
 
         <template id="product-card-template">
-            <div class="product-card">
-                <img src="https://picsum.photos/175" alt="Product">
-                <div class="product-card-info">
-                    <h2 class="product-card-name">Product Name</h2>
-                    <p class="product-card-desc">Lorem ipsum</p>
-                    <h3 class="product-card-price">Product Price</h3>
+            <a href="/productPage.html/-1" class="product-link">
+                <div class="product-card">
+                    <img src="https://picsum.photos/175" alt="Product">
+                    <div class="product-card-info">
+                        <h2 class="product-card-name">Product Name</h2>
+                        <p class="product-card-desc">Lorem ipsum</p>
+                        <h3 class="product-card-price">Product Price</h3>
+                    </div>
                 </div>
-            </div>
+            </a>
         </template>
 
         <div id="product-cards-container">
@@ -39,6 +36,7 @@
             </div>
         </div>
         
+        <script src="js/header.js"></script>
         <script src="js/products.js"></script>
         <script>
             window.addEventListener("DOMContentLoaded", async () => {
