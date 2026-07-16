@@ -11,9 +11,9 @@
     <body>
         <div id="header"></div>
 
-        <template id="product-card-template">
+        <template id="special-product-card-template">
             <div class="special-product-card">
-                <img ckass="special-product-card-img" src="https://picsum.photos/175" alt="Product">
+                <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
                 <div class="product-card-info">
                     <h2 class="special-product-card-name">Product Name</h2>
                     <h3 class="special-product-card-price">Product Price</h3>
@@ -24,58 +24,28 @@
         <div class="special-products-container" id="featured-products">
             <h1 class="special-products-title">Featured Products</h2>
             <div class="special-product-cards">
-                <div class="special-product-card">
-                    <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
-                    <div class="product-card-info">
-                        <h2 class="special-product-card-name">Product Name</h2>
-                        <p class="special-product-card-price">Product Price</p>
-                    </div>
-                </div>
-                <div class="special-product-card">
-                    <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
-                    <div class="product-card-info">
-                        <h2 class="special-product-card-name">Product Name</h2>
-                        <p class="special-product-card-price">Product Price</p>
-                    </div>
-                </div>
-                <div class="special-product-card">
-                    <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
-                    <div class="product-card-info">
-                        <h2 class="special-product-card-name">Product Name</h2>
-                        <p class="special-product-card-price">Product Price</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
         <div class="special-products-container" id="seasonal-products">
             <h1 class="special-products-title">Seasonal Products</h2>
             <div class="special-product-cards">
-                <div class="special-product-card">
-                    <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
-                    <div class="product-card-info">
-                        <h2 class="special-product-card-name">Product Name</h2>
-                        <p class="special-product-card-price">Product Price</p>
-                    </div>
-                </div>
-                <div class="special-product-card">
-                    <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
-                    <div class="product-card-info">
-                        <h2 class="special-product-card-name">Product Name</h2>
-                        <p class="special-product-card-price">Product Price</p>
-                    </div>
-                </div>
-                <div class="special-product-card">
-                    <img class="special-product-card-img" src="https://picsum.photos/175" alt="Product">
-                    <div class="product-card-info">
-                        <h2 class="special-product-card-name">Product Name</h2>
-                        <p class="special-product-card-price">Product Price</p>
-                    </div>
-                </div>
+                
             </div>
         </div>
 
         <script src="js/header.js"></script>
         <script src="js/products.js"></script>
+        <script src="js/index.js"></script>
+        <script>
+            window.addEventListener("DOMContentLoaded", async () => {
+                const featuredProducts = await fetchProductsByType("FEATURED");
+                const seasonalProducts = await fetchProductsByType("SEASONAL");
+
+                displaySpecialProducts(featuredProducts);
+                displaySpecialProducts(seasonalProducts);
+            })
+        </script>
     </body>
 </html>

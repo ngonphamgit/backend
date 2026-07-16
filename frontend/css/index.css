@@ -36,11 +36,15 @@
 }
 
 .special-product-card-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
     margin-top: 0px;
+    margin-bottom: 0px;
     margin-left: -5px;
     font-size: 24px;
     font-family: Calibri, Arial, sans-serif;
-    height: 12px;
+    overflow: hidden;
 }
 
 .special-product-card-price {

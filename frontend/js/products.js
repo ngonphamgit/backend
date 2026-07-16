@@ -20,6 +20,13 @@ async function fetchProducts(query, page, size)
     return data;
 }
 
+async function fetchProductsByType(productType)
+{
+    const response = await fetch(`http://localhost:8080/products/productType/${encodeURIComponent(productType)}`);
+    const data = await response.json();
+    return data;
+}
+
 async function fetchProduct(id)
 {
     const response = await fetch(`http://localhost:8080/products/${id}`)
