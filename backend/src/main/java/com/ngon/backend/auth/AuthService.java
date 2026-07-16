@@ -8,7 +8,6 @@ import com.ngon.backend.user.Role;
 import com.ngon.backend.user.User;
 import com.ngon.backend.user.UserRepository;
 
-import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

@@ -43,6 +43,12 @@ public class ProductController
         return productService.getProductsByCategory(category, pageable);
     }
 
+    @GetMapping("/productType/{productType}")
+    public Page<ProductResponse> getProductsByType(@PathVariable String productType)
+    {
+        return productService.getProductsByType(productType);
+    }
+
     @GetMapping("/search")
     public Page<ProductResponse> searchProducts(@RequestParam String query, Pageable pageable)
     {

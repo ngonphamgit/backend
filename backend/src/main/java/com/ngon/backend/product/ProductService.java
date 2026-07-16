@@ -59,6 +59,11 @@ public class ProductService
         return productRepo.findAllByCategory(category, pageable).map(this::toResponse);
     }
 
+    public Page<ProductResponse> getProductsByType(String type)
+    {
+        return productRepo.findAllByProductType(ProductType.valueOf(type), PageRequest.of(0, 5)).map(this::toResponse);
+    }
+
     public Page<ProductResponse> searchProducts(String query, Pageable pageable)
     {
         return productRepo.searchByName(query, pageable).map(this::toResponse);

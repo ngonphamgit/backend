@@ -1,10 +1,8 @@
 package com.ngon.backend.user;
 
 import com.ngon.backend.exception.UserNotFoundException;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
 @Service
 public class UserService

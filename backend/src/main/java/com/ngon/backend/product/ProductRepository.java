@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 public interface ProductRepository extends JpaRepository<Product, Long>
 {
     Page<Product> findAllByCategory(String category, Pageable pageable);
+    Page<Product> findAllByProductType(ProductType productType, Pageable pageable);
 
     @Query(value =
             "SELECT * " +
