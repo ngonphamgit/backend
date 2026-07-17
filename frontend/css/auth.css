@@ -1,0 +1,33 @@
+body {
+    background-color: rgb(100, 100, 100);
+}
+
+#auth-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    margin: 0 auto;
+    width: 25%;
+    aspect-ratio: 1;
+    border: 1px solid black;
+    align-content: center;
+}
+
+.auth-field {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 75%;
+    margin: 0 auto;
+}
+
+.field-text {
+    margin-bottom: 0px;
+}
+
+.auth-button {
+    margin-top: 48px;
+    width: 50%;
+    justify-content: center;
+    align-self: center;
+}
