@@ -15,20 +15,19 @@
     justify-self: center;
 }
 
-#auth-buttons {
+.user-buttons {
     justify-self: end;
     display: flex;
-    gap: 10px;
-}
-
-#auth-buttons {
-    display: flex;
-    flex-direction: row;
     gap: 16px;
 }
 
 #auth-buttons button {
-    min-width: 100px;
+    min-width: 80;
+    height: 40%;
+}
+
+#profile-buttons button {
+    min-width: 80;
     height: 40%;
 }
 
@@ -57,4 +56,8 @@
     display: flex;
     align-items: center;
     height: 75%;
+}
+
+.hidden {
+    display: none;
 }

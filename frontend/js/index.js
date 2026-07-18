@@ -9,6 +9,7 @@ function displaySpecialProducts(products)
     {
         const newCard = specialProductCardTemplate.content.cloneNode(true);
 
+        newCard.querySelector(".product-link").href = `productPage.html?id=${product.id}`;
         newCard.querySelector(".special-product-card-img").src = "https://picsum.photos/175";
         newCard.querySelector(".special-product-card-name").textContent = product.name;
         newCard.querySelector(".special-product-card-price").textContent = "$" + product.price;

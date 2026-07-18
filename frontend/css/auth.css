@@ -10,7 +10,6 @@ body {
     width: 25%;
     aspect-ratio: 1;
     border: 1px solid black;
-    align-content: center;
 }
 
 .auth-field {

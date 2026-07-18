@@ -21,6 +21,11 @@
     margin-bottom: 32px;
 }
 
+.product-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .special-product-card {
     display: flex;
     flex-direction: column;

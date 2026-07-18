@@ -6,11 +6,29 @@ const registerButton = document.getElementById("register-button");
 registerButton.addEventListener("click", async () => {
     const newUsername = usernameInput.value;
     const newPassword = passwordInput.value;
-    const data = {
+    const userData = {
         "username" : usernameInput.value,
         "email" : emailInput.value,
         "password" : passwordInput.value
     };
+
+    const response = await fetch(`http://localhost:8080/auth/register`, {
+            method : "POST",
+            headers : {
+                "Content-Type" : "application/json"
+            },
+            body : JSON.stringify(userData)
+        }
+    );
+
+    if (response.ok)
+    {
+        console.log("User created");
+    }
+    else
+    {
+        console.log("User already exists");
+    }
 })
 
 
