@@ -69,7 +69,7 @@ public class ProductService
         return productRepo.searchByName(query, pageable).map(this::toResponse);
     }
 
-    private ProductResponse toResponse(Product product)
+    public ProductResponse toResponse(Product product)
     {
         return new ProductResponse(
                 product.getId(),

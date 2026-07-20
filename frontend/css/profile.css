@@ -1,0 +1,27 @@
+body {
+    font-family: Calibri, Arial, sans-serif;
+}
+
+#profile-container {
+    display: flex;
+    flex-direction: row;
+    width: 70%;
+    margin: 0 auto;
+}
+
+#user-info {
+    border: 1px solid black;
+    width: 28%;
+    margin-right: 2%;
+}
+
+#user-orders {
+    border: 1px solid black;
+    width: 38%;
+    margin-right: 2%;
+}
+
+#user-favorites {
+    border: 1px solid black;
+    width: 30%;
+}

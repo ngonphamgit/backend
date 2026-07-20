@@ -137,6 +137,11 @@ public class OrderService
         return orderToCheckoutResponse(currentOrder);
     }
 
+    public List<Order> getUserOrders(User user)
+    {
+        return orderRepo.findAllByUserId(user.getId());
+    }
+
     private Order createOrder(User user)
     {
         Order order = new Order();
@@ -149,7 +154,7 @@ public class OrderService
         return order;
     }
 
-    private OrderResponse orderToResponse(Order order)
+    public OrderResponse orderToResponse(Order order)
     {
         List<OrderItemResponse> orderItemResponses = new ArrayList<>();
         for (OrderItem orderItem : order.getOrderItems())
