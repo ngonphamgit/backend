@@ -29,4 +29,7 @@ public class Favorite {
     public Long getId() {return this.id;}
     public User getUser() {return this.user;}
     public Product getProduct() {return this.product;}
+
+    public void setUser(User user) {this.user = user;}
+    public void setProduct(Product product) {this.product = product;}
 }

@@ -1,6 +1,7 @@
 package com.ngon.backend.order;
 
 import com.ngon.backend.exception.*;
+import com.ngon.backend.mapper.ResponseMapper;
 import com.ngon.backend.product.Product;
 import com.ngon.backend.product.ProductRepository;
 import com.ngon.backend.user.UserRepository;
@@ -11,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,13 +21,19 @@ public class OrderService
     private final OrderRepository orderRepo;
     private final UserRepository userRepo;
     private final ProductRepository productRepo;
+    private final ResponseMapper responseMapper;
 
-    public OrderService(OrderItemRepository orderItemRepo, OrderRepository orderRepo, UserRepository userRepo, ProductRepository productRepo)
+    public OrderService(OrderItemRepository orderItemRepo, 
+        OrderRepository orderRepo, 
+        UserRepository userRepo, 
+        ProductRepository productRepo,
+        ResponseMapper responseMapper)
     {
         this.orderItemRepo = orderItemRepo;
         this.orderRepo = orderRepo;
         this.userRepo = userRepo;
         this.productRepo = productRepo;
+        this.responseMapper = responseMapper;
     }
 
     @Transactional
@@ -37,7 +43,7 @@ public class OrderService
         Order currentOrder = orderRepo.findByUserIdAndStatus(user.getId(), OrderStatus.CART)
                 .orElseGet(() -> createOrder(user));
 
-        return orderToResponse(currentOrder);
+        return responseMapper.toOrderResponse(currentOrder);
     }
 
     @Transactional
@@ -59,7 +65,7 @@ public class OrderService
         currentOrder.addOrderItem(orderItem);
         orderRepo.save(currentOrder);
 
-        return orderToResponse(currentOrder);
+        return responseMapper.toOrderResponse(currentOrder);
     }
 
     @Transactional
@@ -75,7 +81,7 @@ public class OrderService
         currentOrder.removeOrderItem(orderItem);
         orderRepo.save(currentOrder);
 
-        return orderToResponse(currentOrder);
+        return responseMapper.toOrderResponse(currentOrder);
     }
 
     @Transactional
@@ -98,7 +104,7 @@ public class OrderService
 
         orderRepo.save(currentOrder);
 
-        return orderToResponse(currentOrder);
+        return responseMapper.toOrderResponse(currentOrder);
     }
 
     @Transactional
@@ -134,7 +140,7 @@ public class OrderService
         currentOrder.setTotal(total);
         currentOrder.setStatus(OrderStatus.PLACED);
 
-        return orderToCheckoutResponse(currentOrder);
+        return responseMapper.toCheckoutResponse(currentOrder);
     }
 
     public List<Order> getUserOrders(User user)
@@ -152,41 +158,5 @@ public class OrderService
 
         orderRepo.save(order);
         return order;
-    }
-
-    public OrderResponse orderToResponse(Order order)
-    {
-        List<OrderItemResponse> orderItemResponses = new ArrayList<>();
-        for (OrderItem orderItem : order.getOrderItems())
-        {
-            orderItemResponses.add(orderItemToResponse(orderItem));
-        }
-        return new OrderResponse(order.getId(), order.getStatus(), order.getOrderTime(), order.getTotal(), orderItemResponses);
-    }
-
-    private OrderItemResponse orderItemToResponse(OrderItem item)
-    {
-        return new OrderItemResponse(
-            item.getId(),
-            item.getProduct().getId(),
-            item.getProduct().getName(),
-            item.getQuantity(),
-            item.getUnitPrice()
-        );
-    }
-
-    private CheckoutResponse orderToCheckoutResponse(Order order)
-    {
-        List<OrderItemResponse> orderItemResponses = new ArrayList<>();
-        for (OrderItem orderItem : order.getOrderItems())
-        {
-            orderItemResponses.add(orderItemToResponse(orderItem));
-        }
-        return new CheckoutResponse(
-                order.getId(),
-                order.getTotal(),
-                LocalDateTime.now(),
-                orderItemResponses
-        );
     }
 }

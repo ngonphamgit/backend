@@ -61,4 +61,10 @@ public class GlobalExceptionHandler
     {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
     }
+
+    @ExceptionHandler(FavoriteExistsException.class)
+    public ResponseEntity<String> handleFavoriteExists(FavoriteExistsException e)
+    {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
 }
