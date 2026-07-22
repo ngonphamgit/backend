@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ngon.backend.exception.FavoriteExistsException;
+import com.ngon.backend.exception.FavoriteNotFound;
 import com.ngon.backend.exception.ProductNotFoundException;
 import com.ngon.backend.mapper.ResponseMapper;
 import com.ngon.backend.product.Product;
@@ -33,7 +34,7 @@ public class FavoriteService {
     }
 
     @Transactional
-    public FavoriteResponse addFavorite(Long productId, Authentication auth)
+    public List<FavoriteResponse> addFavorite(Long productId, Authentication auth)
     {
         User user = userRepo.findByUsername(auth.getName());
         Product product = productRepo.findById(productId)
@@ -50,7 +51,25 @@ public class FavoriteService {
 
         favoriteRepo.save(favorite);
 
-        return responseMapper.toFavoriteResponse(favorite);
+        return favoriteRepo.findAllByUserId(user.getId()).stream().map(responseMapper::toFavoriteResponse).toList();
+    }
+
+    @Transactional
+    public List<FavoriteResponse> removeFavorite(Long favoriteId, Authentication auth)
+    {
+        User user = userRepo.findByUsername(auth.getName());
+
+        Favorite favorite = favoriteRepo.findById(favoriteId)
+                .orElseThrow(() -> new FavoriteNotFound("Favorite not found"));
+
+        //favorite exists but user doesn't own it (can't delete someone else's favorite)
+        if (favorite.getUser().getId() != user.getId())
+        {
+            throw new FavoriteNotFound("Favorite not found");
+        }
+
+        favoriteRepo.delete(favorite);
+        return favoriteRepo.findAllByUserId(user.getId()).stream().map(responseMapper::toFavoriteResponse).toList();
     }
 
     public List<Favorite> getUserFavorites(User user)

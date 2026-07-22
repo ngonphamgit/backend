@@ -91,7 +91,6 @@ public class ResponseMapper {
     {
         return new FavoriteResponse(
             favorite.getId(),
-            toUserResponse(favorite.getUser()),
             toProductResponse(favorite.getProduct())
         );
     }

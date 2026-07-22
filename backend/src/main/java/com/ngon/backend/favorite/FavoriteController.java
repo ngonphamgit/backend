@@ -1,5 +1,7 @@
 package com.ngon.backend.favorite;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -22,8 +24,15 @@ public class FavoriteController {
 
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PostMapping("/add")
-    public FavoriteResponse addFavorite(@RequestParam Long productId, Authentication auth)
+    public List<FavoriteResponse> addFavorite(@RequestParam Long productId, Authentication auth)
     {
         return favoriteService.addFavorite(productId, auth);
+    }
+
+    @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
+    @PostMapping("remove")
+    public List<FavoriteResponse> removeFavorite(@RequestParam Long favoriteId, Authentication auth)
+    {
+        return favoriteService.removeFavorite(favoriteId, auth);
     }
 }
