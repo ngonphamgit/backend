@@ -15,6 +15,11 @@ body {
     margin-right: 2%;
 }
 
+#user-username,
+#user-email {
+    margin-left: 10px;
+}
+
 #user-orders {
     border: 1px solid black;
     width: 38%;
@@ -24,4 +29,84 @@ body {
 #user-favorites {
     border: 1px solid black;
     width: 30%;
+}
+
+.profile-title {
+    margin-left: 10px;
+}
+
+.order-card {
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-bottom: 8px;
+}
+
+.order-card-top,
+.order-card-bottom {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-card-top p,
+.order-card-bottom p {
+    margin: 2px;
+}
+
+.order-number {
+    margin-top: 0px;
+    margin-left: 4px;
+}
+
+.order-status {
+    margin-top: 0px;
+    margin-right: 4px;
+}
+
+.order-items {
+    margin-bottom: 0px;
+    margin-left: 4px;
+}
+
+.order-total {
+    margin-bottom: 0px;
+    margin-right: 4px;
+}
+
+.favorite-card {
+    display: flex;
+    flex-direction: row;
+    width: 95%;
+    border: 1px solid black;
+    margin: 0 auto;
+    margin-bottom: 8px;
+}
+
+.favorite-image {
+    width: 35%;
+}
+
+.favorite-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 3%;
+}
+
+.favorite-name {
+    margin-bottom: 2px;
+    margin-top: 8px;
+}
+
+.favorite-price {
+    margin-bottom: 3px;
+    margin-top: 2px;
+}
+
+.favorite-desc {
+    margin-bottom: 0px;
+    margin-top: 3px;
 }

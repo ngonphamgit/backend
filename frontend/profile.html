@@ -9,15 +9,40 @@
         <div id="header"></div>
         <div id="profile-container">
             <div id="user-info">
-                <h2>User Info</h2>
-                <p id="user=username">Username: </p>
+                <h2 class="profile-title">User Info</h2>
+                <p id="user-username">Username: </p>
                 <p id="user-email">Email: </p>
             </div>
             <div id="user-orders">
-                <h2>Orders</h2>
+                <h2 class="profile-title">Orders</h2>
+                <template>
+                    <div class="order-card">
+                        <div class="order-card-top">
+                            <p class="order-number">Order #123</p>
+                            <p class="order-status">Status: <span class="span-status">Placed</span></p>
+                        </div>
+                        <div class="order-card-bottom">
+                            <p class="order-items">Items: 6</p>
+                            <p class="order-total">$178.88</p>
+                        </div>
+                    </div>
+                </template>
+                <div id="orders-container">
+                    
+                </div>
             </div>
             <div id="user-favorites">
-                <h2>Favorited Items</h2>
+                <h2 class="profile-title">Favorited Items</h2>
+                <div id="favorites-container">
+                    <div class="favorite-card">
+                        <img class="favorite-image" src="https://picsum.photos/100" alt="Favorite Image">
+                        <div class="favorite-info">
+                            <h3 class="favorite-name">Favorite</h3>
+                            <h5 class="favorite-price">$99.99</h5>
+                            <p class="favorite-desc">Lorem ipsum</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
