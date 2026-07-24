@@ -17,7 +17,7 @@ public class UserController
 
     @PreAuthorize("hasAnyRole('ADMIN', 'USER')")
     @GetMapping("/me")
-    public String getMe(Authentication auth)
+    public UserProfileResponse getMe(Authentication auth)
     {
         return userService.getMe(auth);
     }

@@ -2,8 +2,54 @@
 <html>
     <head>
         <title>Profile</title>
+        <link rel="stylesheet" href="css/header.css">
+        <link rel="stylesheet" href="css/profile.css">
     </head>
     <body>
-        <h1>My Profile</h1>
+        <div id="header"></div>
+        <div id="profile-container">
+            <div id="user-info">
+                <h2 class="profile-title">User Info</h2>
+                <p id="user-username">Username: </p>
+                <p id="user-email">Email: </p>
+            </div>
+            <div id="user-orders">
+                <h2 class="profile-title">Orders</h2>
+                <template id="order-card-template">
+                    <div class="order-card">
+                        <div class="order-card-top">
+                            <p class="order-number">Order #</p>
+                            <p class="order-status">Status: <span class="span-status">None</span></p>
+                        </div>
+                        <div class="order-card-bottom">
+                            <p class="order-items">Items: 0</p>
+                            <p class="order-total">$0.00</p>
+                        </div>
+                    </div>
+                </template>
+                <div id="orders-container">
+                    
+                </div>
+            </div>
+            <div id="user-favorites">
+                <h2 class="profile-title">Favorited Items</h2>
+                <template id="favorite-card-template">
+                    <div class="favorite-card">
+                        <img class="favorite-image" src="https://picsum.photos/100" alt="Favorite Image">
+                        <div class="favorite-info">
+                            <h3 class="favorite-name">Favorite</h3>
+                            <h5 class="favorite-price">$99.99</h5>
+                            <p class="favorite-desc">Lorem ipsum</p>
+                        </div>
+                    </div>
+                </template>
+                <div id="favorites-container">
+                    
+                </div>
+            </div>
+        </div>
+
+        <script src="js/header.js"></script>
+        <script src="js/profile.js"></script>
     </body>
 </html>
