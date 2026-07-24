@@ -97,6 +97,10 @@ body {
 }
 
 .favorite-name {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
     margin-bottom: 2px;
     margin-top: 8px;
 }
@@ -107,6 +111,11 @@ body {
 }
 
 .favorite-desc {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+
     margin-bottom: 0px;
     margin-top: 3px;
 }

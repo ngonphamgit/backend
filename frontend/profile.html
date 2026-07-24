@@ -15,15 +15,15 @@
             </div>
             <div id="user-orders">
                 <h2 class="profile-title">Orders</h2>
-                <template>
+                <template id="order-card-template">
                     <div class="order-card">
                         <div class="order-card-top">
-                            <p class="order-number">Order #123</p>
-                            <p class="order-status">Status: <span class="span-status">Placed</span></p>
+                            <p class="order-number">Order #</p>
+                            <p class="order-status">Status: <span class="span-status">None</span></p>
                         </div>
                         <div class="order-card-bottom">
-                            <p class="order-items">Items: 6</p>
-                            <p class="order-total">$178.88</p>
+                            <p class="order-items">Items: 0</p>
+                            <p class="order-total">$0.00</p>
                         </div>
                     </div>
                 </template>
@@ -33,7 +33,7 @@
             </div>
             <div id="user-favorites">
                 <h2 class="profile-title">Favorited Items</h2>
-                <div id="favorites-container">
+                <template id="favorite-card-template">
                     <div class="favorite-card">
                         <img class="favorite-image" src="https://picsum.photos/100" alt="Favorite Image">
                         <div class="favorite-info">
@@ -42,10 +42,14 @@
                             <p class="favorite-desc">Lorem ipsum</p>
                         </div>
                     </div>
+                </template>
+                <div id="favorites-container">
+                    
                 </div>
             </div>
         </div>
 
         <script src="js/header.js"></script>
+        <script src="js/profile.js"></script>
     </body>
 </html>
